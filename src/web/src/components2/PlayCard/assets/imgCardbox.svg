@@ -1,0 +1,25 @@
+<svg width="324" height="164" viewBox="0 0 324 164" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_2381_10329)">
+<mask id="path-1-inside-1_2381_10329" fill="white">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H316V4H320V156H316V160H4V156H0V4H4V0Z"/>
+</mask>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4 0H316V4H320V156H316V160H4V156H0V4H4V0Z" fill="#FFF1E8"/>
+<path d="M316 0H320V-4H316V0ZM4 0V-4H0V0H4ZM316 4H312V8H316V4ZM320 4H324V0H320V4ZM320 156V160H324V156H320ZM316 156V152H312V156H316ZM316 160V164H320V160H316ZM4 160H0V164H4V160ZM4 156H8V152H4V156ZM0 156H-4V160H0V156ZM0 4V0H-4V4H0ZM4 4V8H8V4H4ZM316 -4H4V4H316V-4ZM320 4V0H312V4H320ZM320 0H316V8H320V0ZM324 156V4H316V156H324ZM316 160H320V152H316V160ZM320 160V156H312V160H320ZM4 164H316V156H4V164ZM0 156V160H8V156H0ZM0 160H4V152H0V160ZM-4 4V156H4V4H-4ZM4 0H0V8H4V0ZM0 0V4H8V0H0Z" fill="black" mask="url(#path-1-inside-1_2381_10329)"/>
+</g>
+<rect x="33" y="45" width="254" height="70" fill="#C2C3C7" stroke="black" stroke-width="2"/>
+<rect x="34" y="46" width="4" height="4" fill="black"/>
+<rect x="34" y="110" width="4" height="4" fill="black"/>
+<rect x="282" y="46" width="4" height="4" fill="black"/>
+<rect x="282" y="110" width="4" height="4" fill="black"/>
+<defs>
+<filter id="filter0_d_2381_10329" x="0" y="0" width="324" height="164" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="4" dy="4"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2381_10329"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2381_10329" result="shape"/>
+</filter>
+</defs>
+</svg>

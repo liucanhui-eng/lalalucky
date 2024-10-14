@@ -1,0 +1,139 @@
+.collapsible-list-v2 {
+  .collapsible-list-box{ 
+    .collapsible-list-title { 
+      color: #000; 
+      text-align: justify;
+      font-family: "PingFang SC";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 30px;
+    }
+    .collapsible-list-content { 
+      color: #000; 
+      font-family: "PingFang SC";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      a {
+        color: #5f40a1;
+        font-family: "PingFang SC";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        text-decoration-line: underline;
+      }
+    }
+  }
+  
+  .title1 {
+    color: #000;
+    text-align: center;
+    font-family: "Retro Pixel Petty 5x5";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .h1 {
+    color: #000;
+
+    text-align: center;
+    font-family: "PingFang SC";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+  .h2 {
+    margin-top: 20px;
+    color: #000;
+
+    text-align: justify;
+    font-family: "PingFang SC";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 25px;
+  }
+  .content-title {
+    color: #000;
+
+    text-align: justify;
+    font-family: "PingFang SC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 25px;
+  }
+
+  .content0 {
+    margin-top: 8px;
+    color: #000;
+
+    text-align: justify;
+    font-family: "PingFang SC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+
+    a {
+      color: #5f40a1;
+
+      text-align: justify;
+      font-family: "PingFang SC";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 25px;
+      text-decoration-line: underline;
+    }
+  }
+
+  .content {  
+    color: #000;
+
+    text-align: justify;
+    font-family: "PingFang SC";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+
+    a {
+      color: #5f40a1;
+
+      text-align: justify;
+      font-family: "PingFang SC";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 25px;
+      text-decoration-line: underline;
+    }
+  }
+
+  strong {
+    font-weight: bold !important;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  li {
+    margin-left: 30px;
+  }
+
+  a {
+    color: #5f40a1;
+    text-decoration-line: underline;
+  }
+  strong {
+    font: bold 16px Arial, sans-serif;
+  }
+}

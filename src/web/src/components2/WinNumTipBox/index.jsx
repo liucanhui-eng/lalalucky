@@ -1,0 +1,16 @@
+import React from 'react';
+import "./index.scss";
+
+export default function Index(props) {
+  const { content } = props;
+
+  return (
+    <div className="win-num-tip-box relative w-full shadow-md"> 
+      <div className="absolute bottom-0 left-0 w-1 h-1 bg-[#000]"></div>
+      <div className="absolute bottom-0 right-0 w-1 h-1 bg-[#000]"></div>
+      <div className="content-aaa">
+        {React.isValidElement(content) ? content : <>{content}</>}
+      </div>
+    </div>
+  );
+}

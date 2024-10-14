@@ -1,0 +1,13 @@
+.com-box {
+  min-width: 100px;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #000;
+  background-color: #f9ebe7;
+
+   
+  .com-box-content{
+    display: flex;
+  }
+}

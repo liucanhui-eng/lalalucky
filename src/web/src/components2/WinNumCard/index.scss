@@ -1,0 +1,113 @@
+.win-num-card {
+  width: 100%; 
+  flex-grow: 1;
+  border-radius: 8px;
+  background: #D9D9D9;
+  display: flex;
+  flex-direction: column;
+
+
+
+  .tips {
+    color: #000000;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.52px;
+    text-align: center;
+    margin-right: 4px;
+    margin-top: 4px;
+  }
+
+  .num {
+    color: #000000;
+    font-family: Inter;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 31.47px;
+    text-align: center;
+  }
+
+  .bottom { 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #000000;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    text-align: center;
+
+    .bottom-num {
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 12px;
+
+    }
+
+  }
+
+
+}
+
+.win-num-card-active {
+  width: 100%; 
+  flex-grow: 1;
+  border-radius: 8px;
+  background: #16DB65;
+  display: flex;
+  flex-direction: column;
+
+
+
+  .tips {
+    color: #fff;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.52px;
+    text-align: center;
+    margin-right: 4px;
+    margin-top: 4px;
+  }
+
+  .num {
+    color: #fff;
+    font-family: Inter;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 31.47px;
+    text-align: center;
+  }
+
+  .bottom { 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #fff;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    text-align: center;
+
+    .bottom-num {
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 12px;
+
+    }
+
+  }
+
+
+}

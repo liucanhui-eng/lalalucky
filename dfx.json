@@ -1,0 +1,58 @@
+{
+  "canisters": {
+    "product": {
+      "main": "src/product/main.mo",
+      "type": "motoko"
+    },"pay_center": {
+      "main": "src/pay_center/main.mo",
+      "type": "motoko"
+    },"play_record": {
+      "main": "src/play_record/main.mo",
+      "type": "motoko"
+    },
+    "web": {
+      "dependencies": [
+        "product"
+      ],
+      "source": [
+        "src/web/dist"
+      ],
+      "type": "assets",
+      "workspace": "web"
+    }, 
+    "internet_identity": {
+      "type": "custom",
+      "candid": "src/dependencies/internet_identity/internet_identity.did",
+      "wasm": "src/dependencies/internet_identity/internet_identity_dev.wasm.gz",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      }
+    }
+  },
+  "defaults": {
+    "bitcoin": {
+      "enabled": true,
+      "log_level": "info",
+      "nodes": [
+        "127.0.0.1:18444"
+      ]
+    },
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1,
+  "networks": {
+    "myNetwork": {
+      "providers": [
+        "https://luckylottery.fun"
+      ],
+      "type": "persistent"
+    }
+  }
+}

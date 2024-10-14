@@ -1,0 +1,113 @@
+.tab-switch-page-v2 {
+  height: 100%;
+  background: #C2C3C7;
+
+  .tab-switch-page-v2-content {
+    padding: 24px 28px 0 28px;
+    display: flex;
+    justify-content: center;
+
+    .container {
+      max-width: 375px;
+      display: flex;
+      flex-direction: column; 
+    }
+  }
+
+
+  .tab-switch-page-v2-bottom {
+
+    display: flex;
+    flex-direction: column;
+    background: #C2C3C7;
+
+    .container {
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-around;
+
+
+      .nav-link {
+        margin-top: 2px;
+        width: 88px;
+        height: 56px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-link.noactive {
+        background: none;
+
+        .label {
+          margin-top: 4px;
+          background: #C2C3C7;
+          color: #000;
+          display: flex;
+          width: 85px;
+          height: 14px;
+          flex-direction: column;
+          justify-content: center;
+          flex-shrink: 0;
+          text-align: center;
+          -webkit-text-stroke-width: 4;
+          -webkit-text-stroke-color: #000;
+          font-family: "Retro Pixel Petty 5x5";
+          font-size: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+
+      .nav-link.active {
+        background: #867AA0;
+
+        .label {
+          margin-top: 4px;
+          border-top: 1px solid #000;
+          background: none;
+
+          display: flex;
+          width: 85px;
+          height: 14px;
+          flex-direction: column;
+          justify-content: center;
+          flex-shrink: 0;
+          color: #000;
+
+          text-align: center;
+          -webkit-text-stroke-width: 4;
+          -webkit-text-stroke-color: #000;
+          font-family: "Retro Pixel Petty 5x5";
+          font-size: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 42px;
+        }
+      }
+
+      .nav-link:hover {
+        color: #000;
+      }
+
+      .nav-link.disabled {
+        color: grey;
+        pointer-events: auto;
+      }
+    }
+
+
+  }
+
+
+
+}
+
+.tab-content {
+  overflow-y: auto;
+  /* 如果内容超出可视区域，显示滚动条 */
+}
