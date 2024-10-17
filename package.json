@@ -1,0 +1,20 @@
+{
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "name": "lalalucky",
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "build:test": "npm run build:test --workspaces --if-present",
+    "prebuild": "npm run prebuild --workspaces --if-present",
+    "pretest": "npm run prebuild --workspaces --if-present",
+    "start": "npm run start --workspaces --if-present",
+    "start:test": "npm run start:test --workspaces --if-present",
+    "test": "npm test --workspaces --if-present"
+  },
+  "type": "module",
+  "workspaces": [
+    "src/web"
+  ]
+}

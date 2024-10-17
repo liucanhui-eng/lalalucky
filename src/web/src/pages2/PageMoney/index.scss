@@ -1,0 +1,51 @@
+.page-money-v2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  .nut-tabs-titles {
+    background: none;
+  }
+
+  .nut-tabs-content {
+    height: 0;
+  }
+
+ 
+  .nut-tabs-titles-item{
+    color: rgba(0, 0, 0, 0.65);
+    font-family: "Retro Pixel Petty 5x5";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .nut-tabs-titles-item-active {
+    color: #867AA0;
+
+    text-align: center;
+    font-family: "Retro Pixel Petty 5x5";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .nut-tabs-titles-item-active .nut-tabs-titles-item-line {
+
+    width: 100%;
+  }
+
+
+  .nut-tabs {
+    width: 100%;
+  }
+
+  .nut-tabs-titles-item-active .nut-tabs-titles-item-line {
+    background: #867AA0;
+  }
+
+}

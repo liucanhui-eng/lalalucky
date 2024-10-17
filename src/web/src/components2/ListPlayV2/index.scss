@@ -1,0 +1,77 @@
+.list-play-v2 {
+  
+
+ 
+  
+  /* 隐藏滚动条 */
+  .list-play-box::-webkit-scrollbar {
+    display: none;  /* 对于 Chrome, Safari 和 Edge */
+  }
+  
+  .list-play-box {
+    -ms-overflow-style: none;  /* 对于 Internet Explorer 和 Edge */
+    scrollbar-width: none;     /* 对于 Firefox */
+  }
+
+  .list-play-box { 
+    overflow-y: auto;
+
+    .row-data {
+      margin-top: 8px;
+
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .row-data-img {}
+
+      .row-data-name {
+        width: 90px;
+        display: flex;
+        align-items: center;
+        color: #000;
+        font-family: "PingFang SC";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .row-data-type {
+        display: flex;
+        align-items: center;
+        width: 140px; 
+
+        text-align: left;
+        color: #000;
+
+        font-family: "Retro Pixel Petty 5x5";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        .row-data-type-icon {
+          width: 30px;
+        }
+      }
+
+      .row-data-date {
+        display: flex;
+        justify-content: flex-end;
+
+        width: 100px;
+        text-align: right;
+        color: #000;
+
+        text-align: right;
+        font-family: "PingFang SC";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+  } 
+
+}

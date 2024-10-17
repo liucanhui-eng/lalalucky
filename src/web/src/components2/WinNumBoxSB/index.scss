@@ -1,0 +1,48 @@
+.win-num-box-sb {
+  display: flex;
+  flex-direction: column; 
+  background-color: #f9ebe7;
+  border-left:  2px solid #000;
+  border-bottom:  2px solid #000;
+  border-right:  2px solid #000;
+  border-top:  1px solid #000;
+
+
+  .title {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    .title-content { 
+      width: 100%;
+      margin: 8px 6px;
+      background: #C2C3C7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      color: #000;
+
+      text-align: center;
+      font-family: "PingFang SC";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+
+    }
+  }
+
+  .bottom {
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    background: #867aa0;
+    border-top: 0px solid #000;
+  }
+}

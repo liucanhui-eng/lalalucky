@@ -1,0 +1,545 @@
+
+import Nat "mo:base/Nat";
+import List "mo:base/List";
+import Text "mo:base/Text";
+import Int "mo:base/Int";
+import Bool "mo:base/Bool";
+import Array "mo:base/Array";
+import Hash "mo:base/Hash";
+import HashMap "mo:base/HashMap";
+import Iter "mo:base/Iter";
+import Blob "mo:base/Blob";
+import Nat64 "mo:base/Nat64";
+import Int64 "mo:base/Int64";
+import Random "mo:base/Random";
+import Float "mo:base/Float";
+import RandomUtil "lib/RandomUtil";
+import TicketFactory "lib/TicketFactory";
+import User "lib/User";
+import Hex "lib/Hex";
+import TimeUtil "lib/TimeUtil";
+import SignUtil "lib/SignUtil";
+import Cycles "mo:base/ExperimentalCycles";
+import Principal "mo:base/Principal";
+import Result "mo:base/Result";
+import TextUtils "lib/TextUtils";
+import icp_ledger_canister "../commons/libs/IcpLedgerCanister";
+
+actor class X()=this {
+
+  type icp_ledger_canister_ = icp_ledger_canister.Self;
+  let icp_ledger_canister_holder : icp_ledger_canister_ = actor ("ryjl3-tyaaa-aaaaa-aaaba-cai");
+  // let icp_unit:Nat64=100_000_000;
+  stable var playRecord = List.nil<TicketFactory.PlayRecord>();
+
+
+  let MAX_NUM_USERS = 1000;
+  // let ticket_price = 100000000;
+  // todo  for test
+  let ticket_price:Nat64 = 100000;
+  var records : [var ?RandomUtil.Record] = Array.tabulateVar<?RandomUtil.Record>(MAX_NUM_USERS, func(_:Nat) { null });
+  var next_idx = 0;
+  let fee:Nat64 = 10000;
+  stable let ticket : TicketFactory.Ticket = {
+    issue=0;
+    var inventory = 1000;
+    var stickets = Array.init<Text>(1000, TicketFactory.empty);
+    var win1 = [];
+    var win2 = [];
+    var win3 = [];
+    var win4 = [];
+    var win5 = [];
+    var win6 = [];
+    var init = false;
+    total_count = 1000;
+    currency  = "ICP";
+    price = ticket_price;
+    level = 6;
+    start_time =TimeUtil.getCurrentSecond();
+    var end_time = null;
+    // 总奖金
+    total_bonus = 100000000000;
+    // 中奖率
+    rate = "22.8";
+    //中奖金额
+    pay_out = "90";
+  };
+
+      //不同等级奖对应不同奖金
+    let winMap = HashMap.HashMap<Nat,Nat64>(6, Nat.equal, Hash.hash);
+    winMap.put(1, 100* ticket_price);
+    winMap.put(2, 50* ticket_price);
+    winMap.put(3, 20* ticket_price);
+    winMap.put(4, 10* ticket_price);
+    winMap.put(5, 5* ticket_price);
+    winMap.put(6, 2* ticket_price);
+    let win_times_map = HashMap.HashMap<Nat,Nat>(6, Nat.equal, Hash.hash);
+    win_times_map.put(1, 100);
+    win_times_map.put(2, 50);
+    win_times_map.put(3, 20);
+    win_times_map.put(4, 10);
+    win_times_map.put(5, 5);
+    win_times_map.put(6, 2);
+
+  stable var user_table:List.List<User.User> =List.nil<User.User>();
+
+
+  public shared func reset() : async Text {
+      ticket.stickets := Array.init<Text>(1000, TicketFactory.empty); 
+      ticket.win1 := [];
+      ticket.win2 := [];
+      ticket.win3 := [];
+      ticket.win4 := [];
+      ticket.win5 := [];
+      ticket.win6 := [];
+      ticket.init :=false;
+      ticket.inventory := 1000;
+      next_idx := 0;
+      records := Array.tabulateVar<?RandomUtil.Record>(MAX_NUM_USERS, func(_:Nat) { null });
+      user_table :=List.nil<User.User>();
+      return "操作成功";
+  };
+
+  public shared func clean_user() : async Text {
+      next_idx := 0;
+      records := Array.tabulateVar<?RandomUtil.Record>(MAX_NUM_USERS, func(_:Nat) { null });
+      user_table :=List.nil<User.User>();
+      return "操作成功";
+  };
+
+
+  public shared func init() : async Text {
+    if (ticket.init) {
+      return "已初始化过了";
+    };
+    //todo 6 个等级  
+    let win : [Nat] = await RandomUtil.random_bytes(1000, 228);
+    // 1,2,5,15,30,175  总奖金数 950 中奖率 22.8%
+    var index=8;
+    let win4 : [var Nat] = Array.init<Nat>(15, 0);
+    let win5 : [var Nat] = Array.init<Nat>(30, 0);
+    let win6 : [var Nat] = Array.init<Nat>(175, 0);
+    for(i in Iter.range(0, 14)){
+      win4[i]:=win[index];
+      index+=1;
+    };
+    for(i in Iter.range(0, 29)){
+      win5[i]:=win[index];
+      index+=1;
+    };
+    for(i in Iter.range(0, 174)){
+      win6[i]:=win[index];
+      index+=1;
+    };
+    ticket.win1 := [win[0]];//1
+    ticket.win2 := [win[1], win[2]];//2
+    ticket.win3 := [win[3], win[4], win[5], win[6], win[7]];//5
+    ticket.win4:=Array.freeze(win4);
+    ticket.win5:=Array.freeze(win5);
+    ticket.win6:=Array.freeze(win6);
+    ticket.init := true;
+    return "初始化成功";
+  };
+
+
+  public shared func reset_user(user_id : Text,key:Text) : async Text {
+    if(key != "123456"){
+      return "{\"code\":499,\"message\":\"key error\"}";
+    };
+    let user = User.findUserById(user_id,user_table);
+    switch(user){
+      case (null)
+        return "{\"code\":501,\"message\":\"user does not exist\"}";
+      case (?user){
+        user.tickets := List.nil<User.TicketEntity>();
+        user.ledgers := List.nil<User.Ledger>();
+        user.wallet_balance := 0;
+        return "{\"code\":200,\"message\":\"success\"}";
+      };
+    };
+
+
+  };
+  public shared func withdraw(user_id : Text,user_name : Text, amount : Nat64 ,address:Text,sign:Text) : async Text {
+    if(not SignUtil.check_sign([user_id,user_name,address],sign,user_id#user_name)){
+      return "{\"code\":499,\"message\":\"signature error\"}";
+    };
+    if(amount < 100000){
+      return "{\"code\":500,\"message\":\"withdraw amount cannot be less than 0.001 ICP\"}";
+    };
+
+    let user=User.findUser(user_id,user_name,user_table);
+    switch(user){
+      case (null)
+        return "{\"code\":501,\"message\":\"user does not exist\"}";
+      case (?user){
+        user.wallet_address_new := address;
+        if ((user.wallet_balance) < amount) {
+          return "{\"code\":502,\"message\":\"sorry your credit is running low\"}";
+        } else {
+          let transferArgs : icp_ledger_canister.TransferArgs = {
+            // can be used to distinguish between transactions
+            memo = 0;
+            // the amount we want to transfer
+            amount = {e8s=amount-fee};
+            // the ICP ledger charges 10_000 e8s for a transfer
+            fee = { e8s = 10_000 };
+            // we are transferring from the canisters default subaccount, therefore we don't need to specify it
+            from_subaccount = null;
+            // we take the principal and subaccount from the arguments and convert them into an account identifier
+            // to = Blob.toArray(Principal.toLedgerAccount(args.toPrincipal, args.toSubaccount));
+            // to = Principal.toLedgerAccount(args.toPrincipal, args.toSubaccount);
+            to= Blob.fromArray(Hex.decode2(address));
+            // a timestamp indicating when the transaction was created by the caller; if it is not specified by the caller then this is set to the current ICP time
+            created_at_time = null;
+          };
+          let transferResult = await icp_ledger_canister_holder.transfer(transferArgs);
+          switch (transferResult) {
+            case (#Err(transferError)) {
+                return "{\"code\":503,\"message\":\"" # debug_show (transferError) # "\"}";
+            };
+            case (#Ok(index)) {
+                //添加提现
+                user.wallet_balance := user.wallet_balance - amount;
+                User.addLedger(user,0 - Int64.fromNat64(amount),#WITHDRAW,?index,null);
+                // User.addLedger(user,0 - Int64.fromNat64(fee),#fee);
+               return "{\"code\":200,\"message\":\"withdraw successful\"}";
+            };
+          };
+        };
+      }
+    };
+    return "{\"code\":504,\"message\":\"withdraw failed\"}";
+  };
+
+  public shared func withdrawal_test(user_id : Text,user_name : Text, amount : Nat64 ,address:Text) : async Text {
+    
+    let user=User.findUser(user_id,user_name,user_table);
+
+    switch(user){
+      case (null)
+        return "{\"code\":500,\"message\":\"user does not exist\"}";
+      case (?user){
+        ignore user.wallet_address_new := address;
+        if ((user.wallet_balance - fee) < amount) {
+          return "{\"code\":500,\"message\":\"sorry your credit is running low\"}";
+        } else {
+          let transferArgs : icp_ledger_canister.TransferArgs = {
+            // can be used to distinguish between transactions
+            memo = 0;
+            // the amount we want to transfer
+            amount = {e8s=amount};
+            // the ICP ledger charges 10_000 e8s for a transfer
+            fee = { e8s = 10_000 };
+            // we are transferring from the canisters default subaccount, therefore we don't need to specify it
+            from_subaccount = null;
+            // we take the principal and subaccount from the arguments and convert them into an account identifier
+            // to = Blob.toArray(Principal.toLedgerAccount(args.toPrincipal, args.toSubaccount));
+            // to = Principal.toLedgerAccount(args.toPrincipal, args.toSubaccount);
+            to= Blob.fromArray(Hex.decode2(address));
+            // a timestamp indicating when the transaction was created by the caller; if it is not specified by the caller then this is set to the current ICP time
+            created_at_time = null;
+          };
+          //let transferResult = await icp_ledger_canister_holder.transfer(transferArgs);
+          switch (user_id) {
+            case ("123") {
+                return "{\"code\":500,\"message\":\"" # "transfer error" # "\"}";
+            };
+            case (_) {
+                //添加提现
+                user.wallet_balance := user.wallet_balance - ( amount+ fee );
+                User.addLedger(user,0 - Int64.fromNat64(amount),#WITHDRAW,null,null);
+                User.addLedger(user,0 - Int64.fromNat64(fee),#FEE,null,null);
+               return "{\"code\":200,\"message\":\"withdraw  successful\"}";
+            };
+          };
+        };
+      }
+    };
+    return "{\"code\":500,\"message\":\"withdraw failed\"}";
+  };
+  public shared func deposit(user_id : Text,user_name : Text, amount : Nat64,sign:Text) : async Text {
+      try{
+        let check = SignUtil.check_sign([user_id,user_name,Nat64.toText(amount)],sign,"d29017f6f8744ee99bd4fddb1679e8f2");
+        if(not check){
+          return "{\"code\":500,\"message\":\"signature error\"}";
+        };
+
+         user_table := User.deposit(user_id,user_name, amount,TicketFactory.empty,user_table);
+         let user=User.findUser(user_id,user_name,user_table);
+         switch(user){
+            case (null){};
+            case (?user){
+              //添加充值流水
+              User.addLedger(user,Int64.fromNat64(amount),#DEPOSIT,null,null);
+            }
+         }
+          
+      }catch e {
+        return "{\"code\":500,\"message\":\"deposit failed\"}";
+      };
+
+      return "{\"code\":200,\"message\":\"deposit sccessful\"}";
+  };
+
+  public func show_user(user_id : Text,user_name : Text) : async ?User.UserShow {
+    return User.findUserShow(user_id,user_name,user_table);
+  };
+
+  public shared func login(user_id : Text,user_name:Text) : async Text {
+      let user = User.findUserById(user_id,user_table);
+      switch(user){
+        case (null){
+          return "{\"code\":500,\"message\":\"user does not exist\"}";
+        };
+        case (?user){
+          if(user.user_name != user_name){
+            return "{\"code\":501,\"message\":\"username error\"}";
+          }
+        };
+      };
+      return "{\"code\":200,\"message\":\"login successful\"}";
+  };
+  
+  // public shared func play_batch(user_id :Text,user_name : Text,times:Nat) : async List.List<Text> {
+  //   //func tabulate<X>(size : Nat, generator : Nat -> X) : [X]
+
+  //   // return Array.tabulate<Text>(times, func (i) {
+  //   //   return  await play(user_id);
+  //   // });
+    
+  //   var result = List.nil<Text>();
+
+  //   for(i in Iter.range(1, times)){
+  //       result := List.push(await play(user_id,user_name), result);
+  //   };
+  //   return result;
+  // };
+
+  public shared func play(user_id :Text,user_name :Text,idx : Nat) : async Text {
+
+    let start = TimeUtil.getCurrentMillisecond();
+
+    //检查用户是否存在
+    let user = User.findUser(user_id,user_name,user_table);
+    var curruser={
+      user_id = "";
+      user_name = "";
+      var tickets=List.nil<User.TicketEntity>();
+      var wallet_balance :Nat64 = 0;
+      var wallet_address = Text.encodeUtf8(TicketFactory.empty);
+      var wallet_address_new = TicketFactory.empty;
+      var ledgers = List.nil<User.Ledger>();
+    };
+    switch (user) {
+      case (null) {
+        return "{\"code\":500,\"message\":\"user does not exist\"}";
+      };
+      case (?user) {
+        curruser :=user;
+        //检查用户是否充值
+        if (user.wallet_balance < ticket_price) {
+          return "{\"code\":501,\"message\":\"sorry your credit is running low\"}";
+        };
+      }
+    };
+    //检查库存
+    if (ticket.inventory <= 0) {
+      return "{\"code\":502,\"message\":\"event has ended。\"}";
+    };
+    //生成彩票 更新库存
+    let ticket_no=await TicketFactory.make(ticket,curruser.user_id,await commitment(idx));
+    if (ticket_no == -1) {
+      return "{\"code\":503,\"message\":\"activity has not started yet\"}";
+    };
+    if (ticket_no == -1) {
+      return "{\"code\":504,\"message\":\"number has not been generated yet please try again\"}";
+    };
+    //减去购票金额
+    curruser.wallet_balance -= ticket_price;
+    //添加购票流水
+    User.addLedger(curruser,0 - Int64.fromNat64(ticket_price),#PLAY,null,null);
+    
+    //判断是否中奖
+    let result = TicketFactory.win(ticket,Int.abs(ticket_no), curruser.user_id);
+    //添加购票记录
+    curruser.tickets:=User.addTicket(curruser,Int.abs(ticket_no),result.win,result.level);
+    //中奖了获取中奖金额 更新用户钱包
+    if (result.win) {
+      let amount =winMap.get(result.level);
+      switch(amount){
+        case(null){
+          //do nothing
+        };
+        case(?amount){
+          curruser.wallet_balance += amount;
+          //添加中奖流水
+          let times :?Nat = win_times_map.get(result.level);
+          User.addLedger(curruser,Int64.fromNat64(amount),#WIN,null,times);
+        };
+      };
+    };
+    playRecord:=TicketFactory.addPlayRecord(ticket_no,playRecord,curruser.user_id,curruser.user_name,result.win,result.level);
+     if (ticket.inventory == 0) {
+       ticket.end_time := ?TimeUtil.getCurrentSecond();
+    };
+    let end = TimeUtil.getCurrentMillisecond();
+    let cost = end - start;
+    // ("{"code":200,"ticketno":615,"win":"false,"cost":"1295","level":"0","message":"fff,您的号码是615，很遗憾，您未中奖"}")
+    //    return "{\"code\":200,\"ticketno\":" # Int.toText(ticket_no) # ",\"win\":" # Bool.toText(result.win) # ",\"cost\":\"" # Int.toText(cost) # "\",\"level\":\"" # Nat.toText(result.level) # "\",\"message\":\"" # result.message # "\"}";
+    return "{\"code\":200,\"ticketno\":" # Int.toText(ticket_no) # ",\"win\":" # Bool.toText(result.win) #",\"wallet_balance\":" # Nat64.toText(curruser.wallet_balance) # ",\"cost\":\"" # Int.toText(cost) # "\",\"level\":\"" # Nat.toText(result.level) # "\",\"message\":\"" # result.message # "\"}";
+  };
+
+  public query func query_play_record() : async [TicketFactory.PlayRecord] {
+      let all =  List.toArray(playRecord);
+      if(Array.size(all) <=50){
+        return all ;
+      };
+
+      let sort = Array.sort(all, func (x:TicketFactory.PlayRecord,y:TicketFactory.PlayRecord) : { #less; #equal; #greater } {
+        if (x.play_time < y.play_time) { #less } else if (x.play_time == y.play_time) { #equal } else { #greater }
+      });
+      Array.subArray<TicketFactory.PlayRecord>(Array.reverse<TicketFactory.PlayRecord>(sort), 0, 50);
+  };
+  public query func show() : async TicketFactory.TicketView {
+    return {
+      inventory = ticket.inventory;
+      stickets = Array.freeze(ticket.stickets);
+      win1 = (ticket.win1);
+      win2 = (ticket.win2);
+      win3 = (ticket.win3);
+      win4 = (ticket.win4);
+      win5 = (ticket.win5);
+      win6 = (ticket.win6);
+      init = ticket.init ;
+      issue = ticket.issue;
+      total_count = ticket.total_count;
+      //货币种类
+      currency : Text = ticket.currency;
+      // 抽奖单价
+      price : Nat64 = ticket.price;
+      // 抽奖等级
+      level : Nat = ticket.level;
+      // 开始时间
+      start_time : Int = ticket.start_time;
+      // 结束时间
+      end_time : ?Int = ticket.end_time;
+      // 总奖金
+      total_bonus = ticket.total_bonus;
+      // 中奖率
+      rate = ticket.rate;
+      //中奖金额
+      pay_out = ticket.pay_out;
+    };
+  };
+
+  // -----------------------------------------------查看cycles余额和ICP余额
+  public query func balance() : async Float {
+    let cycles = Cycles.balance();
+    return  Float.fromInt64(Int64.fromNat64(Nat64.fromNat(cycles/1000000000000)));
+  };
+  public shared func get_address() : async Text {
+     return TextUtils.toAddress(Principal.fromActor(this));
+  };
+  public shared func icp_balance_ledger() : async {
+    canister_icp_balance: Nat;
+    user_total_amount : Nat64;
+  } {
+     let canister_icp_balance = await icp_ledger_canister_holder.icrc1_balance_of({owner = Principal.fromActor(this);subaccount = null});
+     var user_total_amount : Nat64 = 0;
+     List.iterate(user_table,func(user:User.User):(){user_total_amount := user_total_amount + user.wallet_balance});
+     return {
+      canister_icp_balance = canister_icp_balance;
+      user_total_amount = user_total_amount;
+     };
+  };
+
+  public shared func user_error_ledger() : async [User.UserShow]{
+     let canister_icp_balance = await icp_ledger_canister_holder.icrc1_balance_of({owner = Principal.fromActor(this);subaccount = null});
+     var user_total_amount : Nat64 = 0;
+     let error_user = List.filter(user_table,func(user:User.User):Bool{
+          var sum : Int64 = 0;
+        List.iterate(user.ledgers,func(ledger:User.Ledger):(){
+            sum := sum + ledger.amount;
+        });
+        return (Int64.fromNat64(user.wallet_balance) != sum);
+     });
+     let error_count = List.size(error_user);
+     if(error_count ==0){
+      return [];
+     };
+     let show =List.map<User.User,User.UserShow>(error_user,func(user:User.User):User.UserShow{
+        return {
+                    user_id = user.user_id;
+                    user_name = user.user_name;
+                    tickets = List.toArray(user.tickets);
+                    wallet_balance = user.wallet_balance;
+                    wallet_address = user.wallet_address_new;
+                    ledgers = List.toArray(user.ledgers);
+                }
+     });
+     return List.toArray(show) ;
+  };
+
+
+
+  //-----------------------------------------------生成随机数
+  public shared func commit(user_id:Text) : async Nat {
+    assert(next_idx < MAX_NUM_USERS);
+    var i = next_idx;
+    while (i > 0) {
+      i := i - 1;
+      ignore do? {
+        let r = records[i] !;
+        if (r.id == user_id){
+          ignore generate_new_seed(i,user_id);
+          return i;
+        } 
+      }
+    };
+    let idx = next_idx;
+    records[idx] := ?{ id = user_id; seed = null };
+    next_idx := next_idx + 1;
+    ignore generate_next_seed();
+    idx
+  };
+
+  // This avoids calling Random.blob() more than once if the previous call
+  // to Random.blob() has not returned.
+  var seed_pending = false;
+  func generate_next_seed() : async () {
+    if seed_pending return;
+    seed_pending := true;
+    let blob = await Random.blob();
+    var i = next_idx;
+    label LOOP while (i > 0) {
+      i := i - 1;
+      ignore do? {
+        let r = records[i] !;
+        // Do not overwrite seed. Break the loop if it already exists
+        if (r.seed != null) break LOOP;
+        records[i] := ?{id = r.id; seed = ?blob};
+      };
+    };
+    seed_pending := false;
+  };
+  func generate_new_seed(idx:Nat,id:Text) : async () {
+    if seed_pending return;
+    seed_pending := true;
+    let blob = await Random.blob();
+    records[idx] := ?{id = id; seed = ?blob};
+    seed_pending := false;
+  };
+
+  // Query the commitment of a user given its index.
+  public query func commitment(idx: Nat) : async ?{id: Text; seed: Blob} {
+    assert(idx < MAX_NUM_USERS);
+    do? {
+      let r = records[idx] !;
+      let seed = r.seed !;
+      {id = r.id; seed }
+    }
+  };
+
+
+};

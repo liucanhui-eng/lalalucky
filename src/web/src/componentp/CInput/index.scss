@@ -1,0 +1,40 @@
+.cinput {
+  padding: 10px 12px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 2px solid #000;
+
+  background: #fff1e8;
+
+  color: #867aa0;
+
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.cinput-readonly {
+  cursor: pointer;
+  padding: 10px 12px;
+  height: 40px;
+  flex-shrink: 0;
+
+  background: #fff1e8;
+
+  color: #867aa0;
+
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  .nut-input .nut-input-native {
+    color: 867AA0;
+  }
+}
+.nut-input .nut-input-native {
+  color: #867aa0;
+}

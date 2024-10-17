@@ -1,0 +1,49 @@
+.winner-board-history-list {
+  .list-play-box {
+    overflow-y: auto;
+
+    .row-data {
+      margin-top: 8px;
+
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+
+      .row-data-name {
+        width: 85px;
+        display: flex;
+        align-items: center;
+        color: #000;
+        font-family: "PingFang SC";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      .row-data-num {
+        width: 100px;
+        height: 24px;
+        background: #fff1e8;
+        color: #000;
+
+        text-align: center;
+        font-family: "PingFang SC";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      .row-data-x {
+        width: 100px;
+        color: #000;
+
+        text-align: right;
+        font-family: "Retro Pixel Petty 5x5";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+  }
+}

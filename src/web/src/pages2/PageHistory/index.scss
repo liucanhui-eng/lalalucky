@@ -1,0 +1,130 @@
+.page-history-v2 { 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 禁止整体页面滚动 */
+
+  .page-history-v2-top {
+    flex-shrink: 0; /* 不允许高度被挤压 */
+  }
+
+  /* 中间区域，设置 sticky 使其在页面滚动时固定 */
+  .page-history-v2-middle {
+    position: -webkit-sticky;
+    position: sticky; /* 使用 sticky 来固定中间区域 */
+    top: 0; /* 当滚动到顶部时才会固定 */
+    z-index: 1; /* 确保中间部分位于滚动内容上方 */
+  }
+
+  /* 底部区域，自适应高度并且可以滚动 */
+  .page-history-v2-bottom {
+    flex-grow: 1; /* 让底部区域自动扩展 */
+  overflow-y: auto; /* 添加滚动条，仅当内容超出时出现滚动条 */
+
+ 
+    position: relative; /* 确保 sticky 的行为正确 */
+
+    /* 滚动内容样式 */
+    .page-history-v2-bottom-scroll-content {
+      flex-grow: 1; /* 让内容占满空间 */
+     
+      min-height: 100px; /* 根据需要设置最小高度 */
+    }
+  }
+
+  .row-title-a {
+    z-index: 10;
+    display: flex;
+    align-items: center;
+
+    .lable {
+      display: flex;
+      align-items: center;
+      width: 120px;
+      height: 14px;
+      flex-shrink: 0;
+      background: #867aa0;
+      color: #000;
+
+      text-align: center;
+      font-family: "Retro Pixel Petty 5x5";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    .row-title-aa {
+      z-index: 10;
+    }
+  }
+
+  .batch-box-container {
+    padding: 16px 8px;
+    .batch-box {
+      cursor: pointer;
+      height: 20px;
+      background: #c2c3c7;
+      color: #000;
+
+      text-align: center;
+      font-family: "PingFang SC";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+    .batch-box-n { 
+      background: #c2c3c7; 
+    }
+    .batch-box-a { 
+      background: #867AA0; 
+    }
+  }
+
+  .info-box {
+    display: flex; 
+    .info-box-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding: 2px 4px;
+
+      height: 14px;
+      background: #fff1e8;
+      color: #000;
+
+      text-align: center;
+      font-family: "PingFang SC";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+
+  .list-play-v2-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .list-play-v2-title {
+      color: #000;
+      font-family: "Retro Pixel Petty 5x5";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .list-play-v2-tips {
+      color: rgba(0, 0, 0, 0.25);
+      text-align: right;
+      font-family: "PingFang SC";
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+}

@@ -1,0 +1,101 @@
+.win-num-box-b {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #000;
+
+  .win-num-box-b-content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .win-num-box-b-content-top {
+      height: 14px;
+      height: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      color: #000;
+      text-align: right;
+      font-family: "PingFang SC";
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+
+    }
+
+    .win-num-box-b-content-center {
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      color: #000;
+
+      text-align: center;
+      font-family: "Retro Pixel Petty 5x5";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+    }
+
+    .win-num-box-b-content-bottom {
+      height: 20px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      color: #000;
+
+      text-align: center;
+      font-family: "PingFang SC";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+
+    }
+    .win-num-box-b-content-bottom1 {
+      height: 20px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      color: #000;
+
+      text-align: center;
+      font-family: "PingFang SC";
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+
+    }
+  }
+}
+
+.win-num-box-b-n {
+  background-color: #f9ebe7;
+}
+
+.win-num-box-b-a {
+  background-color: #B3A4D3;
+}

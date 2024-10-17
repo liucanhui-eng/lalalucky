@@ -1,0 +1,29 @@
+.com-date-box-v2 {
+  background-color: #FFF1E8;
+  width: 134px; 
+  display: flex;
+  flex-direction: column;
+  padding:4px 4px 18px 4px;
+
+  .com-date-box-row {
+    cursor: pointer;
+    margin-top: 12px;
+    height: 14px; 
+    color: #000;
+
+    text-align: center;
+    font-family: "Retro Pixel Petty 5x5";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400; 
+  }
+  .com-date-box-row-a{
+    background: #867AA0; 
+  }
+  .com-date-box-row-n{
+    background: #C2C3C7; 
+  }
+  .com-date-box-row:hover{
+    background: #867AA0; 
+  }
+}

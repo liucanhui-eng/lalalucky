@@ -1,0 +1,75 @@
+.page-loading {
+    width: 100%;
+    background: #C2C3C7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .title1 {
+        color: #000;
+
+        text-align: center;
+        font-family: "Retro Pixel Petty 5x5";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+    }
+
+    .title2 {
+        margin-top: 8px;
+        color: #000;
+
+        text-align: center;
+        font-family: "PingFang SC";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .title3 {
+        margin-top: 24px;
+        color: #000;
+
+        text-align: center;
+        font-family: "PingFang SC";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .title4 {
+        margin-top: 16px;
+    }
+
+    .loading {
+        margin-top: 8px;
+        color: #000;
+
+        text-align: center;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .info-box {
+        width: 231px;
+        color: #000;
+
+        text-align: center;
+        font-family: "PingFang SC";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .btn-box {
+        width: 231px;
+    }
+}

@@ -1,0 +1,38 @@
+.bubble-wrapper {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .bubble-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 10;
+  }
+  
+  .bubble-content {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+    white-space: nowrap;
+  }
+  
+  .bubble-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  
+  /* 根据需要调整箭头的样式 */
+  .bubble-arrow {
+    border-width: 8px;
+    border-color: transparent transparent white transparent; /* 颜色 */
+  }
+  

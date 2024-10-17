@@ -1,0 +1,66 @@
+.title-box-v2 {
+  display: flex;
+  flex-direction: column;
+
+  .title-box-v2-tips {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    text-align: right;
+
+
+    text-align: right;
+    color: #000;
+
+    text-align: right;
+    font-family: "PingFang SC";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    .tips-icon {
+      margin-left: 3px;
+    }
+  }
+
+  .title-box-v2-txt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: #000;
+
+    text-align: center;
+    font-family: "Retro Pixel Petty 5x5";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  /* 初始化按钮背景 */
+  .tips-icon {
+    margin-left: 3px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    border: none;
+    background-image: url("./assets/iconInit.svg"); /* 初始背景图片 */
+    background-size: cover; /* 让背景图片覆盖整个按钮 */
+    cursor: pointer;
+    transition: background-image 0.3s ease; /* 添加平滑过渡效果 */
+  }
+
+  /* 鼠标悬停时的背景 */
+  .tips-icon:hover {
+    background-image: url("./assets//iconHover.svg"); /* 悬停时的背景图片 */
+  }
+
+  /* 鼠标点击时的背景 */
+  .tips-icon:active {
+    background-image: url("./assets/iconInit.svg"); /* 点击时的背景图片 */
+  }
+}

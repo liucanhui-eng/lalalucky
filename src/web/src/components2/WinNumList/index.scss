@@ -1,0 +1,156 @@
+.win-num-list-v2 {
+  display: flex;
+  flex-direction: column;
+
+
+  .row-data {
+    .row-data-left {
+      margin-right: 4px;
+    }
+
+    .row-data-right {
+      margin-left: 4px;
+    }
+  }
+
+
+
+
+  .nut-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      text-align: left;
+      width: 200px;
+      color: #000;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .tips {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: right;
+      color: #3e3e3e;
+      font-family: Inter;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+      .tips-icon {
+        margin-left: 3px;
+      }
+    }
+  }
+
+  .win-num-card-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+
+
+    .win-num-card-row {
+
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .row-data-type {
+      margin: 0px;
+    }
+
+    .row-data-1 {
+      margin-top: 4px;
+    }
+
+    .row-data-2 {
+      margin-top: 2px;
+    }
+
+
+  }
+
+ 
+
+  .win-num-card-bottom-tips-box{
+    width: 100%;
+    position: relative; 
+    .win-num-card-bottom-tips{
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 100;
+
+      .num-box-con {
+        border: 2px solid #000;
+        position: relative;
+        max-height: 300px;
+        overflow-y: auto;
+        padding:0px 0 4px 4px ;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background-color: #FFF1E8;
+    
+        .num-box-item {
+          margin-right: 3px;
+          margin-top: 3px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          width: 40px;
+          height: 32px;
+          flex-shrink: 0;
+    
+          .num-box-item-title {
+            color: #000;
+    
+            text-align: center;
+            font-family: "PingFang SC";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+    
+          .num-box-item-info {
+            color: #000;
+            text-align: center;
+            font-family: Inter;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+        .num-box-item-a {
+          background: #C2C3C7;
+        }
+        .num-box-item-b {
+          background: #B3A4D3;
+        }
+      }
+    }
+  }
+}

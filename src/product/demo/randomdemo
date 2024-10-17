@@ -1,0 +1,69 @@
+import Array "mo:base/Array";
+import Random "mo:base/Random";
+
+actor {
+  let MAX_NUM_USERS = 100;
+  type Record = { id: Principal; seed: ?Blob };
+  var records : [var ?Record] = [var];
+  var next_idx = 0;
+
+  func init() {
+    next_idx := 0;
+    records := Array.tabulateVar<?Record>(MAX_NUM_USERS, func(_:Nat) { null });
+  };
+  init();
+
+  // Reset the game
+  public func reset() {
+   init()
+  };
+
+  // Make a commitment for the caller, and return an index of the commitment.
+  // If the same caller already has committed, return its previous index.
+  public shared ({ caller }) func commit() : async Nat {
+    assert(next_idx < MAX_NUM_USERS);
+    var i = next_idx;
+    while (i > 0) {
+      i := i - 1;
+      ignore do? {
+        let r = records[i] !;
+        if (r.id == caller) return i;
+      }
+    };
+    let idx = next_idx;
+    records[idx] := ?{ id = caller; seed = null };
+    next_idx := next_idx + 1;
+    ignore generate_next_seed();
+    idx
+  };
+
+  // This avoids calling Random.blob() more than once if the previous call
+  // to Random.blob() has not returned.
+  var seed_pending = false;
+  func generate_next_seed() : async () {
+    if seed_pending return;
+    seed_pending := true;
+    let blob = await Random.blob();
+    var i = next_idx;
+    label LOOP while (i > 0) {
+      i := i - 1;
+      ignore do? {
+        let r = records[i] !;
+        // Do not overwrite seed. Break the loop if it already exists
+        if (r.seed != null) break LOOP;
+        records[i] := ?{id = r.id; seed = ?blob};
+      };
+    };
+    seed_pending := false;
+  };
+
+  // Query the commitment of a user given its index.
+  public query func commitment(idx: Nat) : async ?{id: Principal; seed: Blob} {
+    assert(idx < MAX_NUM_USERS);
+    do? {
+      let r = records[idx] !;
+      let seed = r.seed !;
+      {id = r.id; seed }
+    }
+  };
+}

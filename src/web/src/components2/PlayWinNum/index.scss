@@ -1,0 +1,217 @@
+.play-win-num {
+  display: flex;
+  flex-direction: column;
+
+
+  .row-data{ 
+    .row-data-left{
+      margin-right: 4px;
+    }
+    .row-data-right{
+      margin-left: 4px;
+    }
+  }
+
+
+
+
+  .nut-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      text-align: left;
+      width: 200px;
+      color: #000;
+      font-family: Inter;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .tips {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: right;
+      color: #3e3e3e;
+      font-family: Inter;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+      .tips-icon {
+        margin-left: 3px;
+      }
+    }
+  }
+
+  .win-num-card-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+
+
+    .win-num-card-row {
+      margin-top: 4px;
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .row-data-type {
+      margin: 0px;
+    }
+
+    .row-data-1 {
+      margin-top: 4px;
+    }
+
+    .row-data-2 {
+      margin-top: 2px;
+    }
+
+    .num-box {
+      max-height: 200px;
+      overflow-y: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #fff;
+
+      .num-box-item {
+        margin-left: 3px;
+        margin-top: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        background: #d9d9d9;
+
+        .num-box-item-title {
+          color: #000;
+          text-align: center;
+          font-family: HeadLineA;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        .num-box-item-info {
+          color: #000;
+          text-align: center;
+          font-family: Inter;
+          font-size: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+    }
+  }
+
+  .num-box {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #fff;
+
+    .num-box-item {
+      margin-left: 3px;
+      margin-top: 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      background: #d9d9d9;
+
+      .num-box-item-title {
+        color: #000;
+        text-align: center;
+        font-family: HeadLineA;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .num-box-item-info {
+        color: #000;
+        text-align: center;
+        font-family: Inter;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+  }
+}
+
+.num-box {
+  width: 320px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  background: #d9d9d9;
+  padding: 4px 0;
+
+  .num-box-item {
+    margin-left: 3px;
+    margin-top: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background: #fff;
+
+    .num-box-item-title {
+      color: #000;
+      text-align: center;
+      font-family: HeadLineA;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .num-box-item-info {
+      color: #000;
+      text-align: center;
+      font-family: Inter;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}

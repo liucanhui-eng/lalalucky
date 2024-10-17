@@ -1,0 +1,43 @@
+.com-card-box {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #000;
+  background-color: #f9ebe7;
+  margin-top: 8px;
+
+  .com-card-box-title {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    .com-card-box-title-content {
+      padding: 0 10px;
+      width: 100%;
+      margin: 8px 6px;
+      background: #c2c3c7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+
+      text-align: center;
+      font-family: "PingFang SC";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+  }
+
+  .bottom {
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    background: #867aa0;
+    border-top: 2px solid #000;
+  }
+}

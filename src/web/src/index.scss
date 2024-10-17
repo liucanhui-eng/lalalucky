@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nutui-overlay-bg-color: rgba(0, 0, 0, 0.25);
+}
+
+@layer components {
+  .retro-button {
+    @apply font-rpp w-[120px] h-[32px] leading-[28px] text-center text-[12px] rounded-[54px] border-[2px] border-solid border-[#000] bg-[#FFF1E8] cursor-pointer;
+  }
+
+  .retro-button:hover {
+    @apply bg-[#FCDDBD];
+  }
+  .retro-button:active {
+    @apply bg-[#FCDDBD];
+  }
+
+  .retro-button-primary {
+    @apply bg-[#867AA0];
+  }
+  .retro-button-primary:hover {
+    @apply bg-[#B3A4D3];
+  }
+  .retro-button-primary:active {
+    @apply bg-[#B3A4D3];
+  }
+
+  .retro-button-disabled {
+    @apply bg-[#C2C3C7];
+  }
+
+  .retro-button-disabled:hover {
+    @apply bg-[#C2C3C7];
+  }
+  
+  .retro-button-disabled:active {
+    @apply bg-[#C2C3C7];
+  }
+}
