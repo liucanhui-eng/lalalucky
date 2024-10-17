@@ -506,7 +506,7 @@ actor class X()=this{
 
     public shared ({ caller }) func win( player : Principal,win_amount : Nat64,times:Nat,tid:Int) : async TransferResult {
         let amount = Nat64.toNat(win_amount);
-        if (Principal.toText(caller) != "iteyf-3iaaa-aaaal-amela-cai") {
+        if (Principal.toText(caller) != "3mx6v-vqaaa-aaaak-ao3kq-cai") {
             return #Err(#GenericError({error_code=500;message = "permission denied"}));
         };
         let shop_user = PayCenterTypes.getUser(users,caller);
